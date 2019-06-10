@@ -1,0 +1,11 @@
+{
+  "name": "regex-object",
+  "version": "1.0.0",
+  "description": "store and modify regex as js objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "author": "Jade Fung <fungj@reed.edu>",
+  "license": "MIT"
+}
