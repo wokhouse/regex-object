@@ -7,5 +7,15 @@
     "test": "jest --watch"
   },
   "author": "Jade Fung <fungj@reed.edu>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^22.6.4",
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "randomstring": "^1.1.5"
+  }
 }
