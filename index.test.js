@@ -113,6 +113,32 @@ test('moveNode() should move nodes into parents', () => {
   expect(regex.nodeList).toEqual([setNode.name, charNode1.name, charNode3.name, charNode2.name]);
 });
 
-test.todo('moveNode() should move nodes out of parents');
+test('moveNode() should move nodes out of parents', () => {
+  const regex = new regexObj.RegexObj();
+  const setNode = regex.addNode({
+    type: 'set',
+  });
+  const charNode1 = regex.addNode({
+    type: 'char',
+    contents: 'h',
+    parent: setNode.name,
+  });
+  const charNode2 = regex.addNode({
+    type: 'char',
+    contents: 'i',
+    parent: setNode.name
+  });
+  // removeFromParent will put child right after the parent's last node
+  regex.moveNode({
+    node: charNode1.name,
+    removeFromParent: true,
+  });
+  expect(regex.nodes[setNode.name].children).toEqual([charNode2.name]);
+  expect(regex.nodeList).toEqual([setNode.name, charNode2.name, charNode1.name]);
+});
 
 test.todo('moveNode() should move nodes within parents');
+
+test.todo('moveNode() should move nodes between parents');
+
+test.todo('moveNode() should move nodes out of parent and then to a specified index');
