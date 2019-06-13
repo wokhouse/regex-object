@@ -13,6 +13,7 @@ module.exports = {
     },
     "parserOptions": {
         "ecmaVersion": 2018
+        "no-return-assign": "except-parens",
     },
     "rules": {
         "jest/no-disabled-tests": "warn",
