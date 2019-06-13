@@ -49,11 +49,26 @@ class RegexObj {
   }
 
   // moveNode accepts a node name and an index to move the node to
-  moveNode({ node: nodeName, index }) {
+  moveNode({ node: nodeName, index, addToParent }) {
     // get node object
     const node = this.nodes[nodeName];
     // remove node from nodeList
     this.nodeList.splice(node.position, 1);
+    // check if are we moving things in or out of parents
+    // TODO: fix limitation where we can only move nodes to
+    // the end of the parent's children
+    if (addToParent) {
+      const parentNode = this.nodes[addToParent];
+      const parentIndex = parentNode.position;
+      const parentChildCount = parentNode.children.length;
+      const lastChildIndex = parentIndex + parentChildCount;
+      index = lastChildIndex + 1;
+      // if we are adding to a parent, we need to update
+      // this node's parent field and add this to the
+      // parent's children field
+      parentNode.children.push(nodeName);
+      node.parent = parentNode.name;
+    }
     // insert into nodeList at new index
     this.nodeList.splice(index, 0, nodeName);
     // update other node's positions
