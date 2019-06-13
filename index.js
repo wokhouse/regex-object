@@ -68,6 +68,18 @@ class RegexObj {
     };
     return res;
   }
+
+  // moveNode accepts a node name and an index to move the node to
+  moveNode({ node: nodeName, index }) {
+    // get node object
+    const node = this.nodes[nodeName];
+    // remove node from nodeList
+    this.nodeList.splice(node.position, 1);
+    // insert into nodeList at new index
+    this.nodeList.splice(index, 0, nodeName);
+    // update other node's positions
+    this.nodeList.map((nn, i) => (this.nodes[nn].position = i));
+  }
 }
 
 const regexObj = {

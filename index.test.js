@@ -55,3 +55,38 @@ test('addNode() should add a set with a character in it', () => {
   expect(charNode.parent).toEqual(setNode.name);
   expect(regex.nodes[setNode.name].children).toEqual([charNode.name]);
 });
+
+test('moveNode() should move nodes', () => {
+  const regex = new regexObj.RegexObj();
+  const charNode1 = regex.addNode({
+    type: 'char',
+    contents: 'd',
+  });
+  const charNode2 = regex.addNode({
+    type: 'char',
+    contents: 'o',
+  });
+  const charNode3 = regex.addNode({
+    type: 'char',
+    contents: 'g',
+  });
+  // rearrange "dog" to spell "god"
+  regex.moveNode({
+    node: charNode1.name,
+    index: 2,
+  });
+  regex.moveNode({
+    node: charNode3.name,
+    index: 0,
+  });
+  expect(regex.nodeList).toEqual([charNode3.name, charNode2.name, charNode1.name]);
+  expect(regex.nodes[charNode1.name].position).toEqual(2);
+  expect(regex.nodes[charNode2.name].position).toEqual(1);
+  expect(regex.nodes[charNode3.name].position).toEqual(0);
+});
+
+test.todo('moveNode() should move nodes into parents');
+
+test.todo('moveNode() should move nodes out of parents');
+
+test.todo('moveNode() should move nodes within parents');
