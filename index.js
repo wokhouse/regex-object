@@ -1,5 +1,6 @@
 const rs = require('randomstring');
 const canAcceptChild = require('./src/canAcceptChild');
+const exportRegex = require('./src/exportRegex.js');
 
 class RegexObj {
   constructor() {
@@ -95,6 +96,14 @@ class RegexObj {
     this.nodeList.splice(index, 0, nodeName);
     // update other node's positions
     this.nodeList.map((nn, i) => (this.nodes[nn].position = i));
+  }
+
+  exportRegex() {
+    const output = exportRegex({
+      nodes: this.nodes,
+      nodeList: this.nodeList,
+    });
+    return output;
   }
 }
 

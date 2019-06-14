@@ -142,3 +142,19 @@ test.todo('moveNode() should move nodes within parents');
 test.todo('moveNode() should move nodes between parents');
 
 test.todo('moveNode() should move nodes out of parent and then to a specified index');
+
+test('exportRegex() should output a valid regex string', () => {
+  const regex = new regexObj.RegexObj();
+  const setNode = regex.addNode({
+    type: 'set',
+  });
+  const charNode1 = regex.addNode({
+    type: 'lowercase_alphabet',
+    parent: setNode.name,
+  });
+  const modNode1 = regex.addNode({
+    type: 'plus',
+  });
+  const output = regex.exportRegex();
+  expect(output).toEqual('/[a-z]+/gm');
+});
