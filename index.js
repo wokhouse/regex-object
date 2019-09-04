@@ -3,10 +3,10 @@ const canAcceptChild = require('./src/canAcceptChild');
 const exportRegex = require('./src/exportRegex.js');
 
 class RegexObj {
-  constructor() {
-    this.nodes = {};
-    this.nodeList = [];
-    this.nodeCount = 0;
+  constructor(nodes = {}, nodeList = [], nodeCount = 0) {
+    this.nodes = nodes;
+    this.nodeList = nodeList;
+    this.nodeCount = nodeCount;
   }
 
   // addNode will insert a new regex part into the class' data
