@@ -1,6 +1,7 @@
 const rs = require('randomstring');
 const canAcceptChild = require('./src/canAcceptChild');
 const exportRegex = require('./src/exportRegex.js');
+const items = require('./src/items.js');
 
 class RegexObj {
   constructor(nodes = {}, nodeList = [], nodeCount = 0) {
@@ -109,6 +110,7 @@ class RegexObj {
 
 const regexObj = {
   RegexObj,
+  items,
 };
 
 module.exports = regexObj;
