@@ -21,6 +21,7 @@ class RegexObj {
       contents,
       position: this.nodeCount,
     };
+    if (type === 'set') node.children = [];
     if (parent) {
       const parentNode = this.nodes[parent];
       // if parent arg specified, check to see if parent node

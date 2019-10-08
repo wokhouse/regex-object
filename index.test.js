@@ -56,6 +56,15 @@ test('addNode() should add a set with a character in it', () => {
   expect(regex.nodes[setNode.name].children).toEqual([charNode.name]);
 });
 
+// new set nodes should have empty children array in it
+test('addNode() new sets should have empty children array', () => {
+  const regex = new regexObj.RegexObj();
+  const setNode = regex.addNode({
+    type: 'set',
+  });
+  expect(regex.nodes[setNode.name].children).toEqual([]);
+});
+
 test('moveNode() should move nodes', () => {
   const regex = new regexObj.RegexObj();
   const charNode1 = regex.addNode({
