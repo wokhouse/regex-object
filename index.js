@@ -47,6 +47,7 @@ class RegexObj {
       type: this.nodes[nodeName].type,
       contents: this.nodes[nodeName].contents,
       parent: this.nodes[nodeName].parent,
+      children: this.nodes[nodeName].children,
     };
     return res;
   }
@@ -98,6 +99,21 @@ class RegexObj {
     this.nodeList.splice(index, 0, nodeName);
     // update other node's positions
     this.nodeList.map((nn, i) => (this.nodes[nn].position = i));
+  }
+
+  deleteNode({ node: nodeName }) {
+    const node = this.nodes[nodeName];
+    // if the node is a child node of a parent, delete the node from the parent node
+    if (node.parent) {
+      this.nodes[node.parent].children = this.nodes[node.parent]
+        .children.filter(n => n !== nodeName);
+    }
+    // remove node from node object
+    delete this.nodes[nodeName];
+    // remove node from nodeList
+    this.nodeList = this.nodeList.filter(n => n !== nodeName);
+    // refactor node positions with new structure of the parent node
+    this.nodeList.map((n, i) => this.nodes[n].position = i);
   }
 
   exportRegex() {

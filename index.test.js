@@ -167,3 +167,53 @@ test('exportRegex() should output a valid regex string', () => {
   const output = regex.exportRegex();
   expect(output).toEqual('/[a-z]+/gm');
 });
+
+test('deleteNode() should delete the node', () => {
+  const regex = new regexObj.RegexObj();
+  const charNode = regex.addNode({
+    type: 'char',
+    contents: 'testhaha',
+  });
+  regex.deleteNode({ node: charNode.name });
+  expect(regex.nodes).toEqual({});
+  expect(regex.nodeList).toEqual([]);
+});
+
+test('deleteNode() should delete the node and remove the node from its parents children array', () => {
+  const regex = new regexObj.RegexObj();
+  const setNode = regex.addNode({
+    type: 'set',
+  });
+  const charNode = regex.addNode({
+    type: 'char',
+    contents: 'test',
+    parent: setNode.name,
+  });
+  regex.deleteNode({ node: charNode.name});
+  const testObj = {};
+  testObj[setNode.name] = { ...regex.nodes[setNode.name] };
+  expect(regex.nodes[setNode.name].children).toEqual([]);
+  expect(regex.nodes).toEqual(testObj);
+});
+
+test('deleteNode() should update all node positions', () => {
+  const regex = new regexObj.RegexObj();
+  const charNode = regex.addNode({
+    type: 'char',
+    contents: 'test',
+  });
+  regex.addNode({
+    type: 'char',
+    contents: 'foo',
+  });
+  regex.addNode({
+    type: 'char',
+    contents: 'bar',
+  });
+  regex.deleteNode({ node: charNode.name });
+  // iterate through nodeList, check to see that
+  // node position matches its index in the list
+  regex.nodeList.map((n, i) => {
+    expect(regex.nodes[n].position).toEqual(i);
+  });
+});
