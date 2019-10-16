@@ -165,7 +165,7 @@ test('exportRegex() should output a valid regex string', () => {
     type: 'plus',
   });
   const output = regex.exportRegex();
-  expect(output).toEqual('/[a-z]+/gm');
+  expect(output).toEqual('[a-z]+');
 });
 
 test('deleteNode() should delete the node', () => {

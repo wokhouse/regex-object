@@ -25,7 +25,7 @@ const exportRegex = ({ nodes, nodeList }) => {
   });
   // return outputString
   // TODO: output more than JS regex in terms of those letters after it
-  return `/${outputString}/gm`;
+  return `${outputString}`;
 };
 
 module.exports = exportRegex;
