@@ -120,6 +120,8 @@ class RegexObj {
     this.nodeList = this.nodeList.filter(n => n !== nodeName);
     // refactor node positions with new structure of the parent node
     this.nodeList.map((n, i) => this.nodes[n].position = i);
+    // update nodeCount
+    this.nodeCount -= 1;
   }
 
   exportRegex() {

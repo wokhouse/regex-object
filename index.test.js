@@ -232,3 +232,23 @@ test('deleteNode() should update all node positions', () => {
     expect(regex.nodes[n].position).toEqual(i);
   });
 });
+
+test('deleteNode() should nodeCount', () => {
+  const regex = new regexObj.RegexObj();
+  const node1 = regex.addNode({
+    type: 'char',
+    contents: 'test',
+  });
+  const node2 = regex.addNode({
+    type: 'char',
+    contents: 'foo',
+  });
+  const node3 = regex.addNode({
+    type: 'char',
+    contents: 'bar',
+  });
+  regex.deleteNode({ node: node1.name });
+  // check nodeCount
+  expect(regex.nodeCount).toEqual(2);
+  expect(regex.nodeList).toEqual([ node2.name, node3.name ]);
+});
