@@ -101,7 +101,7 @@ class RegexObj {
     this.nodeList.map((nn, i) => (this.nodes[nn].position = i));
   }
 
-  deleteNode({ node: nodeName, deletingChildNode = false }) {
+  deleteNode({ node: nodeName }) {
     const node = this.nodes[nodeName];
     if (node && node.children) {
       const children = node.children;
