@@ -101,10 +101,16 @@ class RegexObj {
     this.nodeList.map((nn, i) => (this.nodes[nn].position = i));
   }
 
-  deleteNode({ node: nodeName }) {
+  deleteNode({ node: nodeName, deletingChildNode = false }) {
     const node = this.nodes[nodeName];
+    if (node && node.children) {
+      const children = node.children;
+      children.map((c) => {
+        this.deleteNode({ node: c });
+      });
+    }
     // if the node is a child node of a parent, delete the node from the parent node
-    if (node.parent) {
+    if (node && node.parent) {
       this.nodes[node.parent].children = this.nodes[node.parent]
         .children.filter(n => n !== nodeName);
     }

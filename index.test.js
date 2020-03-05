@@ -196,6 +196,21 @@ test('deleteNode() should delete the node and remove the node from its parents c
   expect(regex.nodes).toEqual(testObj);
 });
 
+test('deteNode() should delete the children object as well when the parent node is deleted', () => {
+  const regex = new regexObj.RegexObj();
+  const setNode = regex.addNode({
+    type: 'set',
+  });
+  const charNode = regex.addNode({
+    type: 'char',
+    contents: 'test',
+    parent: setNode.name,
+  });
+  regex.deleteNode({ node: setNode.name });
+  expect(regex.nodes).toEqual({});
+  expect(regex.nodeList).toEqual([]);
+});
+
 test('deleteNode() should update all node positions', () => {
   const regex = new regexObj.RegexObj();
   const charNode = regex.addNode({
