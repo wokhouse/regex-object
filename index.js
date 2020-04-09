@@ -21,6 +21,11 @@ class RegexObj {
       contents,
       position: this.nodeCount,
     };
+    // don't allow empty character nodes
+    if (type === 'char' && contents === "") {
+      return null; 
+    }
+    // if we are creating a set, init empty array for children
     if (type === 'set') node.children = [];
     if (parent) {
       const parentNode = this.nodes[parent];
